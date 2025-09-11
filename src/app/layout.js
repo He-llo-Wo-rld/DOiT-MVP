@@ -1,3 +1,4 @@
+import { Layout } from "@/components/Layout/Layout";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 
@@ -10,7 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="uk">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );
