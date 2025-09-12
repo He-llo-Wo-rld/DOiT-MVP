@@ -1,5 +1,6 @@
 "use client";
 
+import { LayoutProvider } from "@/context/LayoutContext";
 import { store } from "@/store";
 import { selectDarkMode } from "@/store/slices/themeSlice";
 import { getTheme } from "@/theme/theme";
@@ -15,7 +16,9 @@ function ThemeWrapper({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ErrorBoundary>{children}</ErrorBoundary>
+      <ErrorBoundary>
+        <LayoutProvider>{children}</LayoutProvider>
+      </ErrorBoundary>
     </ThemeProvider>
   );
 }

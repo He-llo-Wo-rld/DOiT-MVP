@@ -1,18 +1,15 @@
 "use client";
 
+import { useLayoutContext } from "@/context/LayoutContext";
 import { useDrawer } from "@/hooks";
 import { Box, Toolbar } from "@mui/material";
 import { CustomAppBar } from "../AppBar/CustomAppBar";
 import { CustomDrawer } from "../Drawer/CustomDrawer";
 
-export function Layout({
-  children,
-  showComments = false,
-  onCommentsClick,
-  commentsCount,
-  title,
-}) {
+export function Layout({ children }) {
   const { mobileOpen, desktopOpen, handleDrawerToggle } = useDrawer();
+  const { title, showComments, onCommentsClick, commentsCount } =
+    useLayoutContext();
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>

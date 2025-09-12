@@ -1,6 +1,5 @@
 "use client";
 
-import { Layout } from "@/components/Layout/Layout";
 import {
   AddPostButton,
   EmptyState,
@@ -12,6 +11,7 @@ import {
 } from "@/components/Posts";
 import { CustomSnackbar } from "@/components/UI/CustomSnackbar";
 import { ROUTES, SNACKBAR_MESSAGES, TIMEOUTS, UI_TEXTS } from "@/constants";
+import { useLayoutContext } from "@/context/LayoutContext";
 import {
   usePostsData,
   usePostsPagination,
@@ -20,10 +20,12 @@ import {
 } from "@/hooks";
 import { Container } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const PostsPage = () => {
   const router = useRouter();
   const { snackbarProps, showSnackbar } = useSnackbar();
+  const { setTitle } = useLayoutContext();
 
   const { posts, isLoading, isError, error } = usePostsData();
 
@@ -32,6 +34,10 @@ const PostsPage = () => {
 
   const { currentPage, paginatedPosts, totalPages, handlePageChange } =
     usePostsPagination(filteredPosts, debouncedSearch);
+
+  useEffect(() => {
+    setTitle(UI_TEXTS.ALL_POSTS_TITLE);
+  }, [setTitle]);
 
   const handleAddPost = () => {
     router.push(ROUTES.CREATE_POST);
@@ -64,23 +70,21 @@ const PostsPage = () => {
   };
 
   return (
-    <Layout title={UI_TEXTS.ALL_POSTS_TITLE}>
-      <Container maxWidth="lg">
-        <SearchBar value={searchInput} onChange={handleSearchChange} />
+    <Container maxWidth="lg">
+      <SearchBar value={searchInput} onChange={handleSearchChange} />
 
-        {renderContent()}
+      {renderContent()}
 
-        <PostsPagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onChange={handlePageChange}
-        />
+      <PostsPagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onChange={handlePageChange}
+      />
 
-        <AddPostButton onClick={handleAddPost} />
+      <AddPostButton onClick={handleAddPost} />
 
-        <CustomSnackbar {...snackbarProps} />
-      </Container>
-    </Layout>
+      <CustomSnackbar {...snackbarProps} />
+    </Container>
   );
 };
 
