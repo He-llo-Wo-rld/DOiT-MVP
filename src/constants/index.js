@@ -1,4 +1,3 @@
-
 export const ROUTES = {
   HOME: "/",
   POSTS: "/posts",
@@ -19,8 +18,8 @@ export const POST_CONFIG = {
 export const DEFAULT_USER_ID = 1;
 
 export const TIMEOUTS = {
-  REDIRECT_DELAY: 2000,
-  SUCCESS_DELAY: 3000,
+  REDIRECT_DELAY: 200,
+  SUCCESS_DELAY: 600,
   DEBOUNCE_DELAY: 500,
 };
 
