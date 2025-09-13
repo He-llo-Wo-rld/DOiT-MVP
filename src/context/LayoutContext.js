@@ -1,14 +1,24 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 const LayoutContext = createContext(null);
 
 export const LayoutProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [showComments, setShowComments] = useState(false);
-  const [onCommentsClick, setOnCommentsClick] = useState(null);
   const [commentsCount, setCommentsCount] = useState(0);
+  const onCommentsClickRef = useRef(null);
+
+  const setOnCommentsClick = (fn) => {
+    onCommentsClickRef.current = fn;
+  };
+
+  const handleCommentsClick = () => {
+    if (onCommentsClickRef.current) {
+      onCommentsClickRef.current();
+    }
+  };
 
   return (
     <LayoutContext.Provider
@@ -17,7 +27,7 @@ export const LayoutProvider = ({ children }) => {
         setTitle,
         showComments,
         setShowComments,
-        onCommentsClick,
+        onCommentsClick: handleCommentsClick,
         setOnCommentsClick,
         commentsCount,
         setCommentsCount,

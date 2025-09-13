@@ -48,7 +48,7 @@ export default function PostDetailsPage() {
     if (post) {
       setTitle(UI_TEXTS.POST_DETAILS_TITLE(post.id));
       setShowComments(true);
-      setOnCommentsClick(() => handleCommentsClick);
+      setOnCommentsClick(handleCommentsClick);
       setCommentsCount(comments?.length || 0);
     }
 

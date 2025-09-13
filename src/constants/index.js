@@ -19,7 +19,7 @@ export const DEFAULT_USER_ID = 1;
 
 export const TIMEOUTS = {
   REDIRECT_DELAY: 200,
-  SUCCESS_DELAY: 600,
+  SUCCESS_DELAY: 500,
   DEBOUNCE_DELAY: 500,
 };
 
